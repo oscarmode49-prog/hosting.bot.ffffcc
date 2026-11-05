@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: xyz-telegram-bot-hosting
+    runtime: python
+    plan: free
+    buildCommand: pip install --prefer-binary -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: MAX_BOT_FILE_MB
+        value: "10"
+      - key: PIP_DISABLE_PIP_VERSION_CHECK
+        value: "1"
+      - key: PIP_PREFER_BINARY
+        value: "1"
+      - key: PIP_NO_CACHE_DIR
+        value: "0"
+      - key: PYTHONUNBUFFERED
+        value: "1"
